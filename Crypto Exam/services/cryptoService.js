@@ -13,17 +13,16 @@ exports.create = (ownerId, cryptoData) => Crypto.create({ ...cryptoData, owner: 
 //...cryptoData because we distrcuture the data not by hand but by ...
 //the ownerId will be taken automatically via the logged in user
 
-exports.edit = (cryptoId, cryptoData) =>
-    // return Crypto.findByIdAndUpdate(cryptoId, cryptoData) // това беше написало бебето
-    Crypto
-        .findByIdAndUpdate(cryptoId,
-            {
-                name: cryptoData.name,
-                image: cryptoData.image,
-                price: cryptoData.price,
-                description: cryptoData.description,
-                paymentMethod: cryptoData.paymentMethod
-            });
+exports.edit = (cryptoId, cryptoData) => Crypto.findByIdAndUpdate(cryptoId, cryptoData, { runValidators: true }); // това беше написало бебето
+// Crypto
+//     .findByIdAndUpdate(cryptoId,
+//         {
+//             name: cryptoData.name,
+//             image: cryptoData.image,
+//             price: cryptoData.price,
+//             description: cryptoData.description,
+//             paymentMethod: cryptoData.paymentMethod
+//         });
 
 
 exports.delete = (cryptoId) => Crypto.findByIdAndDelete(cryptoId);
