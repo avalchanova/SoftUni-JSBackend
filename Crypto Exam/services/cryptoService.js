@@ -4,8 +4,7 @@ exports.getAll = () => Crypto.find({}).lean(); //find all the crypto from the DB
 exports.getOne = (cryptoId) => Crypto.findById(cryptoId).lean();
 exports.buy = async (userId, cryptoId) => {
     const crypto = await Crypto.findById(cryptoId);
-    // Crypto.findByIdAndUpdate(cryptoId, { $push: { buyers: userId } }); // this is equal to line 8 and 9 
-    //TODO: check if user has already bought the crypto 
+    // Crypto.findByIdAndUpdate(cryptoId, { $push: { buyers: userId } }); // this is equal to line 8 and 9
     crypto.buyers.push(userId);
     return crypto.save(); //await instead of return can be used because it goes to the DB
 };
@@ -13,7 +12,7 @@ exports.create = (ownerId, cryptoData) => Crypto.create({ ...cryptoData, owner: 
 //...cryptoData because we distrcuture the data not by hand but by ...
 //the ownerId will be taken automatically via the logged in user
 
-exports.edit = (cryptoId, cryptoData) => Crypto.findByIdAndUpdate(cryptoId, cryptoData, { runValidators: true }); // това беше написало бебето
+exports.edit = (cryptoId, cryptoData) => Crypto.findByIdAndUpdate(cryptoId, cryptoData, { runValidators: true });
 // Crypto
 //     .findByIdAndUpdate(cryptoId,
 //         {
